@@ -1,98 +1,306 @@
-/*
- * SPDX-FileCopyrightText: no
- * SPDX-License-Identifier: CC0-1.0
+/* StormOS Dark Theme for Calamares
+ * Fixed version with proper widget selectors and fallback styles
+ * Prevents white flash on load
  */
 
-/*
-A branding component can ship a stylesheet (like this one)
-which is applied to parts of the Calamares user-interface.
-In principle, all parts can be styled through CSS.
-Missing parts should be filed as issues.
+/* Main window background - prevents white flash */
+QWidget {
+    background-color: #252527;
+    color: #c0c0c0;
+}
 
-The IDs are based on the object names in the C++ code.
-You can use the Debug Dialog to find out object names:
-  - Open the debug dialog
-  - Choose tab *Tools*
-  - Click *Widget Tree* button
-The list of object names is printed in the log.
+/* Apply dark background to main window immediately */
+QMainWindow {
+    background-color: #252527;
+}
 
-Documentation for styling Qt Widgets through a stylesheet
-can be found at
-    https://doc.qt.io/qt-5/stylesheet-examples.html
-    https://doc.qt.io/qt-5/stylesheet-reference.html
-In Calamares, styling widget classes is supported (e.g.
-using `QComboBox` as a selector).
+/* Labels */
+QLabel {
+    color: #ffffff;
+    background: transparent;
+}
 
-This example stylesheet has all the actual styling commented out.
-The examples are not exhaustive.
+/* Sidebar - matches branding.desc colors */
+#sidebarApp, #logoApp, #sidebarMenuApp {
+    background-color: #252527;
+    border: none;
+}
 
-Use gammaray
+#sidebarMenuApp QListView {
+    background-color: transparent;
+    border: none;
+}
 
-*/
+#sidebarMenuApp QListView::item {
+    color: #a0a0a0;
+    padding: 14px 20px;
+    border-left: 4px solid transparent;
+}
 
-/*** Generic Widgets.
- *
- * You can style **all** widgets of a given class by selecting
- * the class name. Some widgets have specialized sub-selectors.
- */
+#sidebarMenuApp QListView::item:selected {
+    background-color: #2d2d30;
+    color: #ffffff;
+    border-left: 4px solid #4a4a4d;
+}
 
-/*
-QPushButton { background-color: green; }
-*/
+/* Buttons */
+QPushButton {
+    background-color: #38383b;
+    color: #ffffff;
+    border: 1px solid #454548;
+    border-radius: 4px;
+    padding: 6px 18px;
+    font-weight: bold;
+    min-height: 24px;
+    margin: 3px;
+}
 
-/*** Main application window.
- *
- * The main application window has the sidebar, which in turn
- * contains a logo and a list of items -- note that the list
- * can **not** be styled, since it has its own custom C++
- * delegate code.
- */
+QPushButton:hover {
+    background-color: #4a4a4d;
+    border-color: #5a5a5d;
+}
 
-/*
-#mainApp { }
-#sidebarApp { }
-#logoApp { }
-*/
+QPushButton:pressed {
+    background-color: #2d2d30;
+    color: #ffffff;
+}
 
-/*** Welcome module.
- *
- * There are plenty of parts, but the buttons are the most interesting
- * ones (donate, release notes, ...). The little icon image can be
- * styled through *qproperty-icon*, which is a little obscure.
- * URLs can reference the QRC paths of the Calamares application
- * or loaded via plugins or within the filesystem. There is no
- * comprehensive list of available icons, though.
- */
+QPushButton:disabled {
+    background-color: #2a2a2c;
+    color: #5e5e60;
+    border-color: #323234;
+}
 
-/*
-QPushButton#aboutButton { qproperty-icon: url(:/data/images/release.svg); }
-#donateButton,
-#supportButton,
-#releaseNotesButton,
-#knownIssuesButton { qproperty-icon: url(:/data/images/help.svg); }
-*/
+/* Primary button styling */
+QPushButton[objectName="primaryButton"] {
+    background-color: #4a4a4d;
+}
 
-/*** Partitioning module.
- *
- * Many moving parts, which you will need to experiment with.
- */
+/* Inputs */
+QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+    background-color: #1e1e20;
+    color: #ffffff;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+    padding: 8px;
+    selection-background-color: #4a4a4d;
+}
 
-/*
-#bootInfoIcon { }
-#bootInfoLable { }
-#deviceInfoIcon { }
-#defineInfoLabel { }
-#scrollAreaWidgetContents { }
-#partitionBarView { }
-*/
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border: 1px solid #4a4a4d;
+    background-color: #252527;
+}
 
-/*** Licensing module.
- *
- * The licensing module paints individual widgets for each of
- * the licenses. The item can be collapsed or expanded.
- */
+QComboBox::drop-down {
+    border: none;
+    width: 24px;
+}
 
-/*
-#licenseItem {  }
-#licenseItemFullText {  }
-*/
+QComboBox::down-arrow {
+    image: none;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #4a4a4d;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #1e1e20;
+    color: #ffffff;
+    border: 1px solid #3c3c3c;
+    selection-background-color: #4a4a4d;
+}
+
+/* Checkboxes */
+QCheckBox {
+    spacing: 10px;
+    color: #ffffff;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 2px solid #454548;
+    background-color: #1e1e20;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #5a5a5d;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #4a4a4d;
+    border-color: #4a4a4d;
+}
+
+/* Progress Bar */
+QProgressBar {
+    background-color: #1e1e20;
+    border: 1px solid #3c3c3c;
+    border-radius: 10px;
+    text-align: center;
+    height: 12px;
+}
+
+QProgressBar::chunk {
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #4a4a4d, stop:1 #444342);
+    border-radius: 9px;
+}
+
+/* Lists & Tables */
+QListView, QTreeView, QTableView {
+    background-color: #303032;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+    alternate-background-color: #2a2a2c;
+}
+
+QListView::item, QTreeView::item, QTableView::item {
+    padding: 6px;
+}
+
+QListView::item:hover, QTreeView::item:hover, QTableView::item:hover {
+    background-color: #3a3a3c;
+}
+
+QListView::item:selected, QTreeView::item:selected, QTableView::item:selected {
+    background-color: #4a4a4d;
+    color: #ffffff;
+}
+
+QHeaderView::section {
+    background-color: #303032;
+    color: #ffffff;
+    border: 1px solid #3c3c3c;
+    padding: 6px;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background: #1e1e20;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar:horizontal {
+    background: #1e1e20;
+    height: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background: #454548;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover, QScrollBar::handle:horizontal:hover {
+    background: #4a4a4d;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line,
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+    border: none;
+}
+
+/* GroupBox */
+QGroupBox {
+    color: #fec431;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+    margin-top: 14px;
+    padding-top: 14px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    left: 12px;
+}
+
+/* Tabs */
+QTabBar::tab {
+    background: #303032;
+    color: #c0c0c0;
+    border: 1px solid #3c3c3c;
+    padding: 8px 16px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:hover {
+    background: #3a3a3c;
+    color: #ffffff;
+}
+
+QTabBar::tab:selected {
+    background: #252527;
+    color: #ffffff;
+    border-bottom: 2px solid #4a4a4d;
+}
+
+/* Tooltips */
+QToolTip {
+    background-color: #303032;
+    color: #ffffff;
+    border: 1px solid #4a4a4d;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+/* Menus and Status Bar */
+QMenuBar, QMenu, QStatusBar {
+    background-color: #252527;
+    color: #ffffff;
+}
+
+QMenu::item:selected, QMenuBar::item:selected {
+    background-color: #4a4a4d;
+}
+
+/* Dialogs */
+QDialog {
+    background-color: #252527;
+}
+
+/* Radio buttons */
+QRadioButton {
+    color: #ffffff;
+    spacing: 8px;
+}
+
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: 2px solid #454548;
+    background-color: #1e1e20;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #4a4a4d;
+    border-color: #4a4a4d;
+}
+
+/* Sliders */
+QSlider::groove:horizontal {
+    background: #1e1e20;
+    height: 6px;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    background: #4a4a4d;
+    width: 16px;
+    height: 16px;
+    margin: -5px 0;
+    border-radius: 8px;
+}
+
+QSlider::sub-page:horizontal {
+    background: #4a4a4d;
+    border-radius: 3px;
+}
