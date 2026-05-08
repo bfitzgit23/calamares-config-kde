@@ -25,17 +25,17 @@
   critical: false
   hidden: false
   selected: false
-  expanded: true
+  expanded: false
   packages:
     - lutris
     - steam
-    - steam-native-runtime
+    - wine-staging
 - name: "Install Other Software"
   description: "Software"
   critical: false
   hidden: false
   selected: false
-  expanded: true
+  expanded: false
   packages:
    - obs-studio
    - v4l2loopback-dkms
@@ -48,7 +48,7 @@
   critical: false
   hidden: false
   selected: false
-  expanded: true
+  expanded: false
   packages:
    - google-chrome
    - brave-bin
@@ -58,7 +58,7 @@
 - name: "VirtualBox"
   description: "Installs VirtualBox"
   critical: false
-  hidden: true
+  hidden: false
   selected: false
   expanded: false
   packages: 
